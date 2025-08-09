@@ -7,7 +7,7 @@ user_settings = (
 
 def incmain(index):
     salary = user_settings[index].get('salary')
-    isboolean = isBoolean(salary)
+    isboolean = isinstance(salary, bool)
     if isboolean:
         if salary:
             income = user_settings[index].get('wage')
