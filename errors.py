@@ -7,15 +7,62 @@
 #
 from fileinput import filename
 
-def filename(file):
-    if file == 10:
-        return "main.py"
-    if file == 20:
-        return "login.py"
-    if file == 30:
-        return "errors.py"
-    if file == 40:
-        return "income.py"
+dictionary = [
+        {
+            "file": 10,
+            "name": "main.py",
+            "types": {
+                1: {"trunk": ["err0", "err1", "err2"]
+                },
+                2: "null"
+        },
+        {
+            "file": 20,
+            "name": "login.py",
+            "types": {
+                1: {"login()": ["err0", "err1", "err2"]
+                },
+                2: "null"
+            }
+        },
+        {
+            "file": 30,
+            "name": "errors.py",
+            "types": {
+                1: {
+                    "filename()": ["err0", "err1", "err2"],
+                    "errtypechecker()": ["err0", "err1", "err2"],
+                    "exact()": ["err0", "err1", "err2"],
+                    "errors()": ["err0", "err1", "err2"]
+                },
+                2: "null"
+            }
+        },
+        {
+            "file": 40,
+            "name": "income.py",
+            "types": {
+                1: {
+                    "incmain()": ["err0", "err1", "err2"]
+                },
+                2: {
+                    "user_settings": ["err0", "err1", "err2"]
+                }
+            }
+        }
+    ]
+
+
+
+# def filename(file):
+#     if file == 10:
+#         return "main.py"
+#     if file == 20:
+#         return "login.py"
+#     if file == 30:
+#         return "errors.py"
+#     if file == 40:
+#         return "income.py"
 
 def errtypechecker(err):
     if err == 1:
@@ -23,37 +70,37 @@ def errtypechecker(err):
     if err == 2:
         return "globalvar"
 
-def exact(err, file, type):
-    if file == 10:
-        if type == 1:
-            return "trunk"
-        if type == 2:
-            return "Null"
-    if file == 20:
-        if type == 1:
-            if err == 0:
-                return "login()"
-        if type == 2:
-            return "Null"
-    if file == 30:
-        if type == 1:
-            if err == 0:
-                return "filename()"
-            if err == 1:
-                return "errtypechecker()"
-            if err == 2:
-                return "exact()"
-            if err == 3:
-                return "errors()"
-        if type == 2:
-            return "Null"
-    if file == 40:
-        if type == 1:
-            if err == 0:
-                return "incmain()"
-        if type == 2:
-            if err == 0:
-                return "user_settings"
+# def exact(err, file, type):
+#     if file == 10:
+#         if type == 1:
+#             return "trunk"
+#         if type == 2:
+#             return "Null"
+#     if file == 20:
+#         if type == 1:
+#             if err == 0:
+#                 return "login()"
+#         if type == 2:
+#             return "Null"
+#     if file == 30:
+#         if type == 1:
+#             if err == 0:
+#                 return "filename()"
+#             if err == 1:
+#                 return "errtypechecker()"
+#             if err == 2:
+#                 return "exact()"
+#             if err == 3:
+#                 return "errors()"
+#         if type == 2:
+#             return "Null"
+#     if file == 40:
+#         if type == 1:
+#             if err == 0:
+#                 return "incmain()"
+#         if type == 2:
+#             if err == 0:
+#                 return "user_settings"
 
 def errors(err):
     file = str(err)[0]+str(err)[1]
