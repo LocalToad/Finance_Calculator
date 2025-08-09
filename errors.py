@@ -5,6 +5,7 @@
 #1-function, 2-global variable
 #next digit tells error type
 #
+from errno import errorcode
 from fileinput import filename
 
 dictionary = [
@@ -12,15 +13,16 @@ dictionary = [
             "file": 10,
             "name": "main.py",
             "types": {
-                1: {"trunk": ["err0", "err1", "err2"]
+                1: {"trunk": []
                 },
                 2: "null"
+             }
         },
         {
             "file": 20,
             "name": "login.py",
             "types": {
-                1: {"login()": ["err0", "err1", "err2"]
+                1: {"login()": ["User", "User_List", "index"]
                 },
                 2: "null"
             }
@@ -30,12 +32,13 @@ dictionary = [
             "name": "errors.py",
             "types": {
                 1: {
-                    "filename()": ["err0", "err1", "err2"],
-                    "errtypechecker()": ["err0", "err1", "err2"],
-                    "exact()": ["err0", "err1", "err2"],
-                    "errors()": ["err0", "err1", "err2"]
+                    "errtypechecker()": ["err"],
+                    "errors()": ["errorcode", "file", "filecode", "filename", "type", "name", "code"],
+                    "errfixneed()": ["code"]
                 },
-                2: "null"
+                2: [
+                    "dictionary"
+                ]
             }
         },
         {
@@ -43,70 +46,44 @@ dictionary = [
             "name": "income.py",
             "types": {
                 1: {
-                    "incmain()": ["err0", "err1", "err2"]
+                    "incmain()": ["salary", "isboolean", "income", "wage", "hours"]
                 },
-                2: {
-                    "user_settings": ["err0", "err1", "err2"]
-                }
+                2: [
+                    "user_settings"
+                ]
             }
         }
     ]
 
 
-
-# def filename(file):
-#     if file == 10:
-#         return "main.py"
-#     if file == 20:
-#         return "login.py"
-#     if file == 30:
-#         return "errors.py"
-#     if file == 40:
-#         return "income.py"
-
 def errtypechecker(err):
+    if err == 0:
+        return "other"
     if err == 1:
         return "function"
     if err == 2:
         return "globalvar"
 
-# def exact(err, file, type):
-#     if file == 10:
-#         if type == 1:
-#             return "trunk"
-#         if type == 2:
-#             return "Null"
-#     if file == 20:
-#         if type == 1:
-#             if err == 0:
-#                 return "login()"
-#         if type == 2:
-#             return "Null"
-#     if file == 30:
-#         if type == 1:
-#             if err == 0:
-#                 return "filename()"
-#             if err == 1:
-#                 return "errtypechecker()"
-#             if err == 2:
-#                 return "exact()"
-#             if err == 3:
-#                 return "errors()"
-#         if type == 2:
-#             return "Null"
-#     if file == 40:
-#         if type == 1:
-#             if err == 0:
-#                 return "incmain()"
-#         if type == 2:
-#             if err == 0:
-#                 return "user_settings"
+#Incorrect Var, Unrecognized Var type,
+def errfixneed(code):
+    if code == 0:
+        return "Incorrect Input"
+    if code == 1:
+        return "Unrecognized Variable type"
+    if code == 2:
+        return "No value returned"
 
 def errors(err):
-    file = str(err)[0]+str(err)[1]
-    filecode = int(file)
-    fileName = filename(filecode)
-    errtype = errtypechecker(int(str(err)[2]))
-    var = exact(int(str(err)[3]), int(file), int(str(err)[2]))
-    print(fileName, errtype)
-
+    errorcode = str(err)
+    file = errorcode[1] + errorcode[0]
+    filecode = int(file) - 1
+    file = dictionary[filecode]
+    filename = file.get("name")
+    type = errtypechecker(int(errorcode[2]))
+    name = file.get("types")[int(errorcode[2])][int(errorcode[3])]
+    if file.get("typees")[int(errorcode[2])] == 1:
+        code = file.get("types")[int(errorcode[2])][int(errorcode[3])][int(errorcode[4])]
+        print(filename, type, name, code)
+    else:
+        print(filename, type, name)
+    print(errfixneed(int(errorcode[5])))

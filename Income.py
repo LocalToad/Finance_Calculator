@@ -21,8 +21,8 @@ def incmain(index):
             income = wage * hours
             return income
     if not isboolean:
-        print("Error income.py globalvar-user_settings.salary returned unrecognized data type")
+        print("Error 402001")
         return -1
     else:
-        print("Error income.py incmain() var-isboolean returned unrecognized data type")
+        print("Error 401111")
         return -1
