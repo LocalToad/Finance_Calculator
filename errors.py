@@ -56,7 +56,7 @@ dictionary = [
     ]
 
 
-def errtypechecker(err):
+def errTypeChecker(err):
     if err == 0:
         return "other"
     if err == 1:
@@ -65,7 +65,7 @@ def errtypechecker(err):
         return "globalvar"
 
 #Incorrect Var, Unrecognized Var type,
-def errfixneed(code):
+def errFixNeed(code):
     if code == 0:
         return "Incorrect Input"
     if code == 1:
@@ -75,29 +75,44 @@ def errfixneed(code):
 
 def errors(err):
     # Convert errcode to string
-    errorcode = str(err)
+    # e.g 402001
+    error_code = str(err)
 
     # Reverse first two numbers to get file code
-    file = errorcode[1] + errorcode[0]
+    # e.g 04
+    file = error_code[1] + error_code[0]
 
-    # subtract 1 to get
-    filecode = int(file) - 1
+    # subtract 1 to get index
+    try:
+        # e.g 3
+        file_code = int(file) - 1
 
-    # look up filecode to get file
-    file = dictionary[filecode]
+        # look up filecode to get file
+        file = dictionary[file_code]
 
-    #grab name from file
-    filename = file.get("name")
+        #grab name from file
+        # e.g income.py
+        file_name = file.get("name")
 
-    #getting the type of error from the 3rd space in the error code
-    type = errtypechecker(int(errorcode[2]))
+        #getting the type of error from the 3rd space in the error code
+        # e.g 402001 -> 2 ->
+        type_ = errTypeChecker(int(error_code[2]))
 
-    # Get the full name of the error code from the 3rd and 4th spaces in the error code
+        # Get the full name of the error code from the 3rd and 4th spaces in the error code
+        name = file.get("types")[int(error_code[2])][int(error_code[3])]
 
-    name = file.get("types")[int(errorcode[2])][int(errorcode[3])]
-    if file.get("types")[int(errorcode[2])] == 1:
-        code = file.get("types")[int(errorcode[2])][int(errorcode[3])][int(errorcode[4])]
-        print(filename, type, name, code)
-    else:
-        print(filename, type, name)
-    print(errfixneed(int(errorcode[5])))
+        # Grab fix needed from last space in code
+        fix_needed = errFixNeed(int(error_code[5]))
+
+        if file.get("types")[int(error_code[2])] == 1:
+            code = file.get("types")[int(error_code[2])][int(error_code[3])][int(error_code[4])]
+        else:
+            code = None
+        print(file_name, type_, name, code, fix_needed)
+        return file_name, type_, name, code, fix_needed
+    except KeyError:
+        print("Error, malformed error code")
+        raise KeyError
+
+
+
