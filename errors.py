@@ -98,7 +98,7 @@ def errors(err):
 
         #getting the type of error from the 3rd space in the error code
         # e.g 402001 -> 2 ->
-        type_ = errTypeChecker(int(error_code[2]))
+        type_ = errtypechecker(int(error_code[2]))
         er = error_code[2]
         # Get the full name of the error code from the 3rd and 4th spaces in the error code
         err = file.get("types").get(error_code[2])
@@ -107,7 +107,7 @@ def errors(err):
         name = list(err)[int(error_code[3])]
 
         # Grab fix needed from last space in code
-        fix_needed = errFixNeed(int(error_code[5]))
+        fix_needed = errfixneed(int(error_code[5]))
 
         if int(error_code[2]) == 1:
             code = file.get("types").get(error_code[2]).get(name)[int(error_code[4])]
