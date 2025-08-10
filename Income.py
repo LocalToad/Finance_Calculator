@@ -20,3 +20,6 @@ def incmain(index, settings_dict):
             hours = settings_dict[index].get('hours')
             income = wage * hours
             return income
+    if not isboolean:
+        print("Eror 402001")
+        return 402001

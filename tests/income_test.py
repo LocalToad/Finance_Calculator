@@ -44,3 +44,6 @@ def test_incmain():
     result = Income.incmain(index, settings)
     expected = 402001
     assert result == expected
+
+
+
