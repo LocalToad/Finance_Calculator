@@ -5,8 +5,7 @@
 #1-function, 2-global variable
 #next digit tells error type
 #
-from errno import errorcode
-from fileinput import filename
+
 
 dictionary = [
         {
@@ -63,6 +62,8 @@ def errtypechecker(err):
         return "function"
     if err == 2:
         return "globalvar"
+    else:
+        print("Error 301000")
 
 #Incorrect Var, Unrecognized Var type,
 def errfixneed(code):
@@ -72,18 +73,22 @@ def errfixneed(code):
         return "Unrecognized Variable type"
     if code == 2:
         return "No value returned"
+    else:
+        print("Error 301200")
 
 def errors(err):
-    errorcode = str(err)
-    file = errorcode[1] + errorcode[0]
-    filecode = int(file) - 1
-    file = dictionary[filecode]
-    filename = file.get("name")
-    type = errtypechecker(int(errorcode[2]))
-    name = file.get("types")[int(errorcode[2])][int(errorcode[3])]
-    if file.get("typees")[int(errorcode[2])] == 1:
-        code = file.get("types")[int(errorcode[2])][int(errorcode[3])][int(errorcode[4])]
-        print(filename, type, name, code)
-    else:
-        print(filename, type, name)
-    print(errfixneed(int(errorcode[5])))
+    try:
+        errorcode = str(err)
+        file = errorcode[1] + errorcode[0]
+        filecode = int(file) - 1
+        file = dictionary[filecode]
+        filename = file.get("name")
+        type = errtypechecker(int(errorcode[2]))
+        name = file.get("types")[int(errorcode[2])][int(errorcode[3])]
+        if file.get("typees")[int(errorcode[2])] == 1:
+            code = file.get("types")[int(errorcode[2])][int(errorcode[3])][int(errorcode[4])]
+            print(filename, type, name, code)
+        else:
+            print(filename, type, name)
+        print(errfixneed(int(errorcode[5])))
+
