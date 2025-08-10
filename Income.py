@@ -1,28 +1,28 @@
 
 user_settings = (
     {'name':'toad', 'salary':False, 'wage':0, 'hours':0},
-    {'name':'snake', 'salary':True, 'wage':2477.12, 'hours':0},
+    {'name':'snake', 'salary':True, 'wage':2477.12, 'hours':0}
 )
 
 
-def incmain(index):
-    salary = user_settings[index].get('salary')
+def incmain(index, settings_dict):
+    salary = settings_dict[index].get('salary')
     isboolean = isinstance(salary, bool)
     if isboolean:
         if salary:
-            income = user_settings[index].get('wage')
+            income = settings_dict[index].get('wage')
             return income
-        elif user_settings[index].get('hours') == 0:
+        elif settings_dict[index].get('hours') == 0:
             print("Not working")
             return 0
         else:
-            wage = user_settings[index].get('wage')
-            hours = user_settings[index].get('hours')
+            wage = settings_dict[index].get('wage')
+            hours = settings_dict[index].get('hours')
             income = wage * hours
             return income
     if not isboolean:
         print("Error 402001")
-        return -1
+        return 402001
     else:
         print("Error 401111")
-        return -1
+        return 401111
