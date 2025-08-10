@@ -22,26 +22,31 @@ dictionary = [
             "file": 20,
             "name": "login.py",
             "types": {
+                '1': {"login": ["User", "User_List", "index"]
                 },
+                '2': "null"
             }
         },
         {
             "file": 30,
             "name": "errors.py",
             "types": {
+                '1':{
                     "errtypechecker()": ["err"],
                     "errors()": ["errorcode", "file", "filecode", "filename", "type", "name", "code"],
                     "errfixneed()": ["code"]
                 },
-                    "dictionary"
-                ]
+                '2': {"dictionary"}
             }
         },
         {
             "file": 40,
             "name": "income.py",
             "types": {
+                '1':{
+                "incmain":["salary", "isboolean", "income", "wage", "hours", "cmd", "feature", "a", "new"]
                 },
+                '2':[
                     "user_settings"
                 ]
             }
