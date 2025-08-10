@@ -44,7 +44,7 @@ dictionary = [
             "name": "income.py",
             "types": {
                 '1':{
-                "incmain":["salary", "isboolean", "income", "wage", "hours", "cmd", "feature", "a", "new"]
+                "incmain()":["salary", "isboolean", "income", "wage", "hours", "cmd", "feature", "a", "new"]
                 },
                 '2':[
                     "user_settings"
