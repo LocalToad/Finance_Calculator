@@ -23,7 +23,3 @@ def incmain(index, settings_dict):
     if not isboolean:
         print("Error 402001")
         return 402001
-    else:
-        # what is the error for? :O
-        print("Error 401111")
-        return 401111

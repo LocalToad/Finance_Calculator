@@ -74,14 +74,28 @@ def errfixneed(code):
         return "No value returned"
 
 def errors(err):
+    # Convert errcode to string
     errorcode = str(err)
+
+    # Reverse first two numbers to get file code
     file = errorcode[1] + errorcode[0]
+
+    # subtract 1 to get
     filecode = int(file) - 1
+
+    # look up filecode to get file
     file = dictionary[filecode]
+
+    #grab name from file
     filename = file.get("name")
+
+    #getting the type of error from the 3rd space in the error code
     type = errtypechecker(int(errorcode[2]))
+
+    # Get the full name of the error code from the 3rd and 4th spaces in the error code
+
     name = file.get("types")[int(errorcode[2])][int(errorcode[3])]
-    if file.get("typees")[int(errorcode[2])] == 1:
+    if file.get("types")[int(errorcode[2])] == 1:
         code = file.get("types")[int(errorcode[2])][int(errorcode[3])][int(errorcode[4])]
         print(filename, type, name, code)
     else:
