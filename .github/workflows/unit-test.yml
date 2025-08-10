@@ -3,7 +3,7 @@ name: Unit Tests
 on: [push]
 
 env:
-  MIN_COVERAGE_REQUIRED: 75
+  MIN_COVERAGE_REQUIRED: 85
 
 jobs:
   run-unit-tests:
