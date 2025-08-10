@@ -1,6 +1,9 @@
 import Income
 import login
-
-user = login.login()
-income = Income.incmain(user, Income.user_settings)
-print(income)
+while (True):
+    user = login.login()
+    if user == "exit":
+        break
+    else:
+        income = Income.incmain(user, Income.user_settings)
+        print(income)

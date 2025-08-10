@@ -46,7 +46,7 @@ dictionary = [
             "name": "income.py",
             "types": {
                 '1': {
-                    "incmain()": ["salary", "isboolean", "income", "wage", "hours"]
+                    "incmain()": ["salary", "isboolean", "income", "wage", "hours", "cmd", "feature", "a"]
                 },
                 '2': [
                     "user_settings"
@@ -101,7 +101,7 @@ def errors(err):
         # Get the full name of the error code from the 3rd and 4th spaces in the error code
         err = file.get("types").get(error_code[2])
 
-        # Get name of the function from the dictionary
+        # Get the name of the function from the dictionary
         name = list(err)[int(error_code[3])]
 
         # Grab fix needed from last space in code
