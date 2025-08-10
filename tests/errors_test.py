@@ -16,7 +16,7 @@ def test_errors():
     # "income.py", "incmain()", "is_boolean", None, "Unrecognized Variable type"
 
     err_code = 401011
-    expected = "income.py", "incmain()", "is_boolean", None, "Unrecognized Variable type"
+    expected = "income.py", "function", "incmain()", "isboolean", "Unrecognized Variable type"
     result = errors.errors(err_code)
     assert result == expected
 

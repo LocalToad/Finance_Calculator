@@ -13,30 +13,30 @@ dictionary = [
             "file": 10,
             "name": "main.py",
             "types": {
-                1: {"trunk": []
+                '1': {"trunk": []
                 },
-                2: "null"
+               '2': "null"
              }
         },
         {
             "file": 20,
             "name": "login.py",
             "types": {
-                1: {"login()": ["User", "User_List", "index"]
+                '1': {"login()": ["User", "User_List", "index"]
                 },
-                2: "null"
+                '2': "null"
             }
         },
         {
             "file": 30,
             "name": "errors.py",
             "types": {
-                1: {
+                '1': {
                     "errtypechecker()": ["err"],
                     "errors()": ["errorcode", "file", "filecode", "filename", "type", "name", "code"],
                     "errfixneed()": ["code"]
                 },
-                2: [
+                '2': [
                     "dictionary"
                 ]
             }
@@ -45,10 +45,10 @@ dictionary = [
             "file": 40,
             "name": "income.py",
             "types": {
-                1: {
+                '1': {
                     "incmain()": ["salary", "isboolean", "income", "wage", "hours"]
                 },
-                2: [
+                '2': [
                     "user_settings"
                 ]
             }
@@ -97,15 +97,18 @@ def errors(err):
         #getting the type of error from the 3rd space in the error code
         # e.g 402001 -> 2 ->
         type_ = errTypeChecker(int(error_code[2]))
-
+        er = error_code[2]
         # Get the full name of the error code from the 3rd and 4th spaces in the error code
-        name = file.get("types")[int(error_code[2])][int(error_code[3])]
+        err = file.get("types").get(error_code[2])
+
+        # Get name of the function from the dictionary
+        name = list(err)[int(error_code[3])]
 
         # Grab fix needed from last space in code
         fix_needed = errFixNeed(int(error_code[5]))
 
-        if file.get("types")[int(error_code[2])] == 1:
-            code = file.get("types")[int(error_code[2])][int(error_code[3])][int(error_code[4])]
+        if int(error_code[2]) == 1:
+            code = file.get("types").get(error_code[2]).get(name)[int(error_code[4])]
         else:
             code = None
         print(file_name, type_, name, code, fix_needed)
