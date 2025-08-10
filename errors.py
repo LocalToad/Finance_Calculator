@@ -22,21 +22,17 @@ dictionary = [
             "file": 20,
             "name": "login.py",
             "types": {
-                '1': {"login()": ["User", "User_List", "index"]
                 },
-                '2': "null"
             }
         },
         {
             "file": 30,
             "name": "errors.py",
             "types": {
-                '1': {
                     "errtypechecker()": ["err"],
                     "errors()": ["errorcode", "file", "filecode", "filename", "type", "name", "code"],
                     "errfixneed()": ["code"]
                 },
-                '2': [
                     "dictionary"
                 ]
             }
@@ -45,10 +41,7 @@ dictionary = [
             "file": 40,
             "name": "income.py",
             "types": {
-                '1': {
-                    "incmain()": ["salary", "isboolean", "income", "wage", "hours", "cmd", "feature", "a"]
                 },
-                '2': [
                     "user_settings"
                 ]
             }
@@ -56,22 +49,26 @@ dictionary = [
     ]
 
 
-def errTypeChecker(err):
+def errtypechecker(err):
     if err == 0:
         return "other"
     if err == 1:
         return "function"
     if err == 2:
         return "globalvar"
+    else:
+        print("Error 301000")
 
 #Incorrect Var, Unrecognized Var type,
-def errFixNeed(code):
+def errfixneed(code):
     if code == 0:
         return "Incorrect Input"
     if code == 1:
         return "Unrecognized Variable type"
     if code == 2:
         return "No value returned"
+    else:
+        print("Error 301200")
 
 def errors(err):
     # Convert errcode to string
