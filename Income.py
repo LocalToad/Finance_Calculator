@@ -3,7 +3,7 @@ import pickle
 
 
 #def infoedit(index):
-with open('Dicts.py', 'rb') as f:  # Open in binary read mode ('rb')
+with open('Dicts.txt', 'rb') as f:  # Open in binary read mode ('rb')
     user_settings = pickle.load(f)
 # = (
    # {'name':(str), 'salary':(bool), 'wage':(float.00), 'hours':(float.0)},
@@ -48,7 +48,7 @@ def incmain(index, settings_dict):
                     if new == 'false':
                         new = False
                 user_settings[index][feature] = new
-                with open('Dicts.py', 'wb') as f:  # Open in binary write mode ('wb')
+                with open('Dicts.txt', 'wb') as f:  # Open in binary write mode ('wb')
                     pickle.dump(user_settings, f)
             elif a.lower() == 'n':
                 print("temp done")
