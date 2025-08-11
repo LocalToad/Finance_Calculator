@@ -6,7 +6,7 @@ while (True):
     if user == "exit":
         break
     else:
-        income = Income.incmain(user, Income.user_settings)
+        income = Income.incmain(user, Income.grabUserSettings())
         hard_expense = Hard_Expense.expense()
         net = income - hard_expense
         print(income)
