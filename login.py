@@ -3,8 +3,7 @@ def login():
     User_List = ('toad', 'snake')
     if User in User_List:
         print("Confirmed")
-        index = User_List.index(User)
-        return index
+        return User
     elif User == 'exit':
         return 'exit'
     else:
