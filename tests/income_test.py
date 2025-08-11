@@ -12,7 +12,7 @@ class TestIncome(unittest.TestCase):
 
 
 
-
+        dummy_settings
 
         # Success Case, index = 0
         index = 0
