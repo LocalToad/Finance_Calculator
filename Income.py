@@ -3,7 +3,6 @@ import pickle
 
 
 #def infoedit(index):
-
 def grabUserSettings():
     with open('Dicts.txt', 'rb') as f:  # Open in binary read mode ('rb')
         user_settings = pickle.load(f)
@@ -13,6 +12,9 @@ def grabUserSettings():
         #{'name':'snake', 'salary':True, 'wage':2477.12, 'hours':0}
     #)
 
+
+# Error cases or success cases reture True-y values
+# Other cases that cause incmain to continue looping return False-y values
 
 def incmain(index, settings_dict):
     salary = settings_dict[index].get('salary')
@@ -37,16 +39,16 @@ def incmain(index, settings_dict):
                 return 402001
         elif cmd.lower() == 'n':
             print("Exiting Calculator")
-            break
+            return True
         elif cmd.lower() == 'edit':
-            if inc_write(index, settings_dict):
+            if not inc_write(index, settings_dict):
                 continue
             else:
-                break
+                # User chose to exit, equivalent to break
+                return True
         else:
             print("Error 401050")
             return 401050
-    return True
 
 def inc_write(index, settings_dict):
     print("name(str), salary(bool), wage(float.00), hours(float.0)")
@@ -65,10 +67,10 @@ def inc_write(index, settings_dict):
         settings_dict[index][feature] = new
         with open('Dicts.txt', 'wb') as f:  # Open in binary write mode ('wb')
             pickle.dump(settings_dict, f)
-        return True
+        return False
     elif a.lower() == 'n':
         print("temp done")
-        return False
+        return True
     else:
         print("Eror 401080")
         return 401070

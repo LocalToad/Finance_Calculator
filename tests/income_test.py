@@ -3,27 +3,28 @@ import unittest
 import Income
 
 import pytest
-from unittest.mock import patch
+from unittest.mock import patch, mock_open
 
 class TestIncome(unittest.TestCase):
+    dummy_settings = (
+        {'name': 'toad', 'salary': False, 'wage': 0, 'hours': 0},
+        {'name': 'snake', 'salary': True, 'wage': 2477.12, 'hours': 0}
+    )
 
     @patch('builtins.input', return_value='y')
     def test_incmain_success(self, mock_input):
 
-        dummy_settings = (
-            {'name':'toad', 'salary':False, 'wage':0, 'hours':0},
-            {'name':'snake', 'salary':True, 'wage':2477.12, 'hours':0}
-    )
+
 
         # Success Case, index = 0
         index = 0
-        result = Income.incmain(index, dummy_settings)
+        result = Income.incmain(index, self.dummy_settings)
         expected = 0
         assert result == expected
 
         # Success Case, index = 1
         index = 1
-        result = Income.incmain(index, dummy_settings)
+        result = Income.incmain(index, self.dummy_settings)
         expected = 2477.12
         assert result == expected
 
@@ -53,6 +54,41 @@ class TestIncome(unittest.TestCase):
         result = Income.incmain(index, settings)
         expected = 402001
         assert result == expected
+
+    @patch('builtins.input', return_value='n')
+    def test_incmain_exit(self, mock_input):
+        index = 0
+        expected = True
+        result = Income.incmain(index, self.dummy_settings)
+        assert result == expected
+
+    @patch('Income.inc_write', return_value=True)
+    @patch('builtins.input', return_value='edit')
+    def test_incmain_edit_user_exit(self, mock_input, mock_inc_write):
+        index = 0
+        expected = True
+        result = Income.incmain(index, self.dummy_settings)
+        assert result == expected
+
+    @patch('builtins.input', return_value='something_else')
+    def test_incmain_error_404050(self, mock_input):
+        index = 0
+        expected = 401050
+        result = Income.incmain(index, self.dummy_settings)
+        assert result == expected
+
+    @patch('builtins.input', side_effect=['wage', 'y', '20'])
+    @patch("builtins.open", new_callable=mock_open)
+    @patch('pickle.dump')
+    def test_inc_write_success(self, mock_dump, mock_file, mock_input):
+        # Test feature wage/hours
+        index = 0
+        expected = False
+        result = Income.inc_write(index, self.dummy_settings)
+
+        mock_file.assert_called_once_with("Dicts.txt", "wb")
+        mock_dump.assert_called_once()
+        assert expected == result
 
 
 
