@@ -2,7 +2,6 @@ import Income
 
 import pytest
 
-
 def test_incmain():
 
 

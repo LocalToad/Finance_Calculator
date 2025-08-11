@@ -5,6 +5,7 @@ import pickle
 #def infoedit(index):
 with open('Dicts.txt', 'rb') as f:  # Open in binary read mode ('rb')
     user_settings = pickle.load(f)
+users = [toad, snake]
 # = (
    # {'name':(str), 'salary':(bool), 'wage':(float.00), 'hours':(float.0)},
     #{'name':'snake', 'salary':True, 'wage':2477.12, 'hours':0}
@@ -35,7 +36,7 @@ def incmain(index, settings_dict):
             break
         elif cmd.lower() == 'edit':
             print("name(str), salary(bool), wage(float.00), hours(float.0)")
-            feature = input("Which feature do you want to edit? ").lower()
+            feature = input(f"Which feature do you want to edit for {users[index]}? ").lower()
             print(user_settings[index][feature])
             a = input("Do you want to change the value?(y/n) ")
             if a.lower() == 'y':
@@ -52,7 +53,6 @@ def incmain(index, settings_dict):
                     pickle.dump(user_settings, f)
             elif a.lower() == 'n':
                 print("temp done")
-                break
             else:
                 print("Eror 401080")
                 return 401070
