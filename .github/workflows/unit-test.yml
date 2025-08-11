@@ -24,7 +24,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Github Action for testing the code
-        run: coverage run -m pytest tests/
+        run: coverage run --source=./ -m pytest tests/
 
       - name: Github Action to retrieve coverage percentage
         id: total-coverage
