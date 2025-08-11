@@ -39,7 +39,10 @@ def incmain(index, settings_dict):
             print("Exiting Calculator")
             break
         elif cmd.lower() == 'edit':
-            inc_write(index, settings_dict)
+            if inc_write(index, settings_dict):
+                continue
+            else:
+                break
         else:
             print("Error 401050")
             return 401050
@@ -61,9 +64,10 @@ def inc_write(index, settings_dict):
         settings_dict[index][feature] = new
         with open('Dicts.txt', 'wb') as f:  # Open in binary write mode ('wb')
             pickle.dump(settings_dict, f)
+        return True
     elif a.lower() == 'n':
         print("temp done")
-        break
+        return False
     else:
         print("Eror 401080")
         return 401070

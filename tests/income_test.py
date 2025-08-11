@@ -12,17 +12,20 @@ class TestIncome(unittest.TestCase):
 
 
 
-        dummy_settings
+        dummy_settings = (
+            {'name':'toad', 'salary':False, 'wage':0, 'hours':0},
+            {'name':'snake', 'salary':True, 'wage':2477.12, 'hours':0}
+    )
 
         # Success Case, index = 0
         index = 0
-        result = Income.incmain(index, Income.user_settings)
+        result = Income.incmain(index, dummy_settings)
         expected = 0
         assert result == expected
 
         # Success Case, index = 1
         index = 1
-        result = Income.incmain(index, Income.user_settings)
+        result = Income.incmain(index, dummy_settings)
         expected = 2477.12
         assert result == expected
 
