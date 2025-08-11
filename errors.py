@@ -50,6 +50,19 @@ dictionary = [
                     "user_settings"
                 ]
             }
+        },
+        {
+            "file": 50,
+            "name": "hard_expense.py",
+            "types": {
+                '1':{
+                    "settings()":["settings_array"],
+                    "expense()":["settings_array", "settings"]
+                },
+                '2':[
+                    "null"
+                ]
+            }
         }
     ]
 

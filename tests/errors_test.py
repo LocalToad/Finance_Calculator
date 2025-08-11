@@ -30,3 +30,8 @@ def test_errors():
     result = errors.errors(err_code)
     assert result == expected
 
+    err_code = 501000
+    expected = "hard_expense.py", "function", "settings()", "settings_array", "Incorrect Input"
+    result = errors.errors(err_code)
+    assert result == expected
+
