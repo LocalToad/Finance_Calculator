@@ -10,8 +10,6 @@ class TestIncome(unittest.TestCase):
     @patch('builtins.input', return_value='y')
     def test_incmain_success(self, mock_input):
 
-
-
         dummy_settings = (
             {'name':'toad', 'salary':False, 'wage':0, 'hours':0},
             {'name':'snake', 'salary':True, 'wage':2477.12, 'hours':0}

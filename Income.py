@@ -46,6 +46,7 @@ def incmain(index, settings_dict):
         else:
             print("Error 401050")
             return 401050
+    return True
 
 def inc_write(index, settings_dict):
     print("name(str), salary(bool), wage(float.00), hours(float.0)")
