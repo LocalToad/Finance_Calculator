@@ -3,12 +3,17 @@ import pickle
 
 
 #def infoedit(index):
-with open('Dicts.txt', 'rb') as f:  # Open in binary read mode ('rb')
-    user_settings = pickle.load(f)
-# = (
-   # {'name':(str), 'salary':(bool), 'wage':(float.00), 'hours':(float.0)},
-    #{'name':'snake', 'salary':True, 'wage':2477.12, 'hours':0}
-#)
+
+def grabUserSettings():
+    with open('Dicts.txt', 'rb') as f:  # Open in binary read mode ('rb')
+        user_settings = pickle.load(f)
+        return user_settings
+    # = (
+       # {'name':(str), 'salary':(bool), 'wage':(float.00), 'hours':(float.0)},
+        #{'name':'snake', 'salary':True, 'wage':2477.12, 'hours':0}
+    #)
+
+
 def incmain(index, settings_dict):
     salary = settings_dict[index].get('salary')
     isboolean = isinstance(salary, bool)
@@ -36,7 +41,7 @@ def incmain(index, settings_dict):
         elif cmd.lower() == 'edit':
             print("name(str), salary(bool), wage(float.00), hours(float.0)")
             feature = input("Which feature do you want to edit? ").lower()
-            print(user_settings[index][feature])
+            print(settings_dict[index][feature])
             a = input("Do you want to change the value?(y/n) ")
             if a.lower() == 'y':
                 new = input(f"Input the New value for {feature}? ").lower()
@@ -47,9 +52,9 @@ def incmain(index, settings_dict):
                         new = True
                     if new == 'false':
                         new = False
-                user_settings[index][feature] = new
+                settings_dict[index][feature] = new
                 with open('Dicts.txt', 'wb') as f:  # Open in binary write mode ('wb')
-                    pickle.dump(user_settings, f)
+                    pickle.dump(settings_dict, f)
             elif a.lower() == 'n':
                 print("temp done")
                 break
