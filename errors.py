@@ -22,7 +22,7 @@ dictionary = [
             "file": 20,
             "name": "login.py",
             "types": {
-                '1': {"login()": ["User", "User_List", "index"]
+                '1': {"login": ["User", "User_List", "index"]
                 },
                 '2': "null"
             }
@@ -31,24 +31,22 @@ dictionary = [
             "file": 30,
             "name": "errors.py",
             "types": {
-                '1': {
+                '1':{
                     "errtypechecker()": ["err"],
                     "errors()": ["errorcode", "file", "filecode", "filename", "type", "name", "code"],
                     "errfixneed()": ["code"]
                 },
-                '2': [
-                    "dictionary"
-                ]
+                '2': {"dictionary"}
             }
         },
         {
             "file": 40,
             "name": "income.py",
             "types": {
-                '1': {
-                    "incmain()": ["salary", "isboolean", "income", "wage", "hours"]
+                '1':{
+                "incmain()":["salary", "isboolean", "income", "wage", "hours", "cmd", "feature", "a", "new"]
                 },
-                '2': [
+                '2':[
                     "user_settings"
                 ]
             }
@@ -56,22 +54,26 @@ dictionary = [
     ]
 
 
-def errTypeChecker(err):
+def errtypechecker(err):
     if err == 0:
         return "other"
     if err == 1:
         return "function"
     if err == 2:
         return "globalvar"
+    else:
+        print("Error 301000")
 
 #Incorrect Var, Unrecognized Var type,
-def errFixNeed(code):
+def errfixneed(code):
     if code == 0:
         return "Incorrect Input"
     if code == 1:
         return "Unrecognized Variable type"
     if code == 2:
         return "No value returned"
+    else:
+        print("Error 301200")
 
 def errors(err):
     # Convert errcode to string
@@ -96,16 +98,16 @@ def errors(err):
 
         #getting the type of error from the 3rd space in the error code
         # e.g 402001 -> 2 ->
-        type_ = errTypeChecker(int(error_code[2]))
+        type_ = errtypechecker(int(error_code[2]))
         er = error_code[2]
         # Get the full name of the error code from the 3rd and 4th spaces in the error code
         err = file.get("types").get(error_code[2])
 
-        # Get name of the function from the dictionary
+        # Get the name of the function from the dictionary
         name = list(err)[int(error_code[3])]
 
         # Grab fix needed from last space in code
-        fix_needed = errFixNeed(int(error_code[5]))
+        fix_needed = errfixneed(int(error_code[5]))
 
         if int(error_code[2]) == 1:
             code = file.get("types").get(error_code[2]).get(name)[int(error_code[4])]

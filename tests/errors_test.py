@@ -20,3 +20,13 @@ def test_errors():
     result = errors.errors(err_code)
     assert result == expected
 
+    err_code = 401050
+    expected = "income.py", "function", "incmain()", "cmd", "Incorrect Input"
+    result = errors.errors(err_code)
+    assert result == expected
+
+    err_code = 401070
+    expected = "income.py", "function", "incmain()", "a", "Incorrect Input"
+    result = errors.errors(err_code)
+    assert result == expected
+
