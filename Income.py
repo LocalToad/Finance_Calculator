@@ -1,5 +1,4 @@
 import json
-import pickle
 
 
 #def infoedit(index):
@@ -16,22 +15,25 @@ def grabUserSettings():
 # Error cases or success cases reture True-y values
 # Other cases that cause incmain to continue looping return False-y values
 
-def incmain(index, settings_dict):
-    salary = settings_dict[index].get('salary')
+def incmain(key, settings_dict):
+    if not settings_dict or not isinstance(settings_dict, dict) or not key:
+        return True # replace with error code
+
+    salary = settings_dict.get(key).get('salary')
     isboolean = isinstance(salary, bool)
     while True:
         cmd = input("Would you like to continue (y/n) or (edit)? ")
         if cmd.lower() == 'y':
             if isboolean:
                 if salary:
-                    income = settings_dict[index].get('wage')
+                    income = settings_dict.get(key).get('wage')
                     return income
-                elif settings_dict[index].get('hours') == 0:
+                elif settings_dict.get(key).get('hours') == 0:
                     print("Not working")
                     return 0
                 else:
-                    wage = settings_dict[index].get('wage')
-                    hours = settings_dict[index].get('hours')
+                    wage = settings_dict.get(key).get('wage')
+                    hours = settings_dict.get(key).get('hours')
                     income = wage * hours
                     return income
             if not isboolean:
@@ -41,7 +43,7 @@ def incmain(index, settings_dict):
             print("Exiting Calculator")
             return True
         elif cmd.lower() == 'edit':
-            if not inc_write(index, settings_dict):
+            if not inc_write(key, settings_dict):
                 continue
             else:
                 # User chose to exit, equivalent to break
