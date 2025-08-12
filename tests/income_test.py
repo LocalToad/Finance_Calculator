@@ -79,7 +79,7 @@ class TestIncome(unittest.TestCase):
 
     @patch('builtins.input', side_effect=['wage', 'y', '20'])
     @patch("builtins.open", new_callable=mock_open)
-    @patch('pickle.dump')
+    @patch('json.dump')
     def test_inc_write_success(self, mock_dump, mock_file, mock_input):
         # Test feature wage/hours
         index = 0

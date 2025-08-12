@@ -1,11 +1,11 @@
-
+import json
 import pickle
 
 
 #def infoedit(index):
 def grabUserSettings():
     with open('Dicts.txt', 'rb') as f:  # Open in binary read mode ('rb')
-        user_settings = pickle.load(f)
+        user_settings = json.load(f)
         return user_settings
     # = (
        # {'name':(str), 'salary':(bool), 'wage':(float.00), 'hours':(float.0)},
@@ -66,7 +66,7 @@ def inc_write(index, settings_dict):
                 new = False
         settings_dict[index][feature] = new
         with open('Dicts.txt', 'wb') as f:  # Open in binary write mode ('wb')
-            pickle.dump(settings_dict, f)
+            json.dump(settings_dict, f)
         return False
     elif a.lower() == 'n':
         print("temp done")
