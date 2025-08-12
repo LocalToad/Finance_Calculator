@@ -1,11 +1,10 @@
-
-import pickle
+import json
 
 
 #def infoedit(index):
 def grabUserSettings():
     with open('Dicts.txt', 'rb') as f:  # Open in binary read mode ('rb')
-        user_settings = pickle.load(f)
+        user_settings = json.load(f)
         return user_settings
     # = (
        # {'name':(str), 'salary':(bool), 'wage':(float.00), 'hours':(float.0)},
@@ -16,22 +15,25 @@ def grabUserSettings():
 # Error cases or success cases reture True-y values
 # Other cases that cause incmain to continue looping return False-y values
 
-def incmain(index, settings_dict):
-    salary = settings_dict[index].get('salary')
+def incmain(key, settings_dict):
+    if not settings_dict or not isinstance(settings_dict, dict) or not key:
+        return True # replace with error code
+
+    salary = settings_dict.get(key).get('salary')
     isboolean = isinstance(salary, bool)
     while True:
         cmd = input("Would you like to continue (y/n) or (edit)? ")
         if cmd.lower() == 'y':
             if isboolean:
                 if salary:
-                    income = settings_dict[index].get('wage')
+                    income = settings_dict.get(key).get('wage')
                     return income
-                elif settings_dict[index].get('hours') == 0:
+                elif settings_dict.get(key).get('hours') == 0:
                     print("Not working")
                     return 0
                 else:
-                    wage = settings_dict[index].get('wage')
-                    hours = settings_dict[index].get('hours')
+                    wage = settings_dict.get(key).get('wage')
+                    hours = settings_dict.get(key).get('hours')
                     income = wage * hours
                     return income
             if not isboolean:
@@ -41,7 +43,7 @@ def incmain(index, settings_dict):
             print("Exiting Calculator")
             return True
         elif cmd.lower() == 'edit':
-            if not inc_write(index, settings_dict):
+            if not inc_write(key, settings_dict):
                 continue
             else:
                 # User chose to exit, equivalent to break
@@ -50,10 +52,10 @@ def incmain(index, settings_dict):
             print("Error 401050")
             return 401050
 
-def inc_write(index, settings_dict):
+def inc_write(key, settings_dict):
     print("name(str), salary(bool), wage(float.00), hours(float.0)")
     feature = input("Which feature do you want to edit? ").lower()
-    print(settings_dict[index][feature])
+    print(settings_dict[key][feature])
     a = input("Do you want to change the value?(y/n) ")
     if a.lower() == 'y':
         new = input(f"Input the New value for {feature}? ").lower()
@@ -64,9 +66,9 @@ def inc_write(index, settings_dict):
                 new = True
             if new == 'false':
                 new = False
-        settings_dict[index][feature] = new
+        settings_dict[key][feature] = new
         with open('Dicts.txt', 'wb') as f:  # Open in binary write mode ('wb')
-            pickle.dump(settings_dict, f)
+            json.dump(settings_dict, f)
         return False
     elif a.lower() == 'n':
         print("temp done")
