@@ -52,10 +52,10 @@ def incmain(key, settings_dict):
             print("Error 401050")
             return 401050
 
-def inc_write(index, settings_dict):
+def inc_write(key, settings_dict):
     print("name(str), salary(bool), wage(float.00), hours(float.0)")
     feature = input("Which feature do you want to edit? ").lower()
-    print(settings_dict[index][feature])
+    print(settings_dict[key][feature])
     a = input("Do you want to change the value?(y/n) ")
     if a.lower() == 'y':
         new = input(f"Input the New value for {feature}? ").lower()
@@ -66,7 +66,7 @@ def inc_write(index, settings_dict):
                 new = True
             if new == 'false':
                 new = False
-        settings_dict[index][feature] = new
+        settings_dict[key][feature] = new
         with open('Dicts.txt', 'wb') as f:  # Open in binary write mode ('wb')
             json.dump(settings_dict, f)
         return False
