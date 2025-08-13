@@ -12,15 +12,12 @@ class TestHardExpense(unittest.TestCase):
 
 
     def test_incmain_success(self):
-        index = None
-        result = Hard_Expense.settings(index)
-        expected = {
-                    'snake':[522, 30, 185, 175, 140.32, 168.16, 39.45],
-                    'toad':[0, 0, 0, 0, 0, 0, 0]
-                    }
+        key = None
+        result = Hard_Expense.settings(key)
+        expected = [0, 0, 0, 0, 0, 0, 0]
         assert result == expected
 
-        index = 0
-        result = Hard_Expense.settings(self.dummy_settings[index])
+        key = '1'
+        result = Hard_Expense.settings(key, self.dummy_settings)
         expected = ["empty", "list"]
         assert result == expected
