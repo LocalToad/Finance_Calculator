@@ -1,5 +1,4 @@
 import errors
-import pytest
 
 def test_errors():
     # Toad-provided success test case

@@ -1,11 +1,23 @@
 import json
+import os
 
+settings = {
+        "toad": {'salary': False, 'wage': 0, 'hours': 0},
+        "snake": {'salary': True, 'wage': 2477.12, 'hours': 0}
+    }
 
 #def infoedit(index):
-def grabUserSettings():
-    with open('Dicts.txt', 'rb') as f:  # Open in binary read mode ('rb')
-        user_settings = json.load(f)
-        return user_settings
+def grabUserSettings(default_settings=settings):
+    path = "Dicts.txt"
+    if os.path.isfile(path):
+        with open(path, 'rb') as f:  # Open in binary read mode ('rb')
+            user_settings = json.load(f)
+
+    else:
+        with open('Dicts.txt', 'wb') as f:  # Open in binary write mode ('wb')
+            user_settings = json.dump(default_settings, f)
+    return user_settings
+
     # = (
        # {'name':(str), 'salary':(bool), 'wage':(float.00), 'hours':(float.0)},
         #{'name':'snake', 'salary':True, 'wage':2477.12, 'hours':0}

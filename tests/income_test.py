@@ -2,7 +2,6 @@ import unittest
 
 import Income
 
-import pytest
 from unittest.mock import patch, mock_open
 
 class TestIncome(unittest.TestCase):
@@ -13,8 +12,6 @@ class TestIncome(unittest.TestCase):
 
     @patch('builtins.input', return_value='y')
     def test_incmain_success(self, mock_input):
-
-
 
         # Success Case, index = 0
         key = "toad"
