@@ -10,8 +10,23 @@ class TestHardExpense(unittest.TestCase):
         'toad':[0, 0, 0, 0, 0, 0, 0]
     }
 
+    def test_expense_success(self):
+        arr = None
+        result = Hard_Expense.expense(None, arr)
+        expected = "ERROR"
+        assert result == expected
 
-    def test_incmain_success(self):
+        arr = [1,1,1]
+        result = Hard_Expense.expense(None, arr)
+        expected = 3
+        assert result == expected
+
+        arr = [240, 330, 110]
+        result = Hard_Expense.expense(None, arr)
+        expected = 680
+        assert result == expected
+
+    def test_settings_success(self):
         key = None
         result = Hard_Expense.settings(key)
         expected = [0, 0, 0, 0, 0, 0, 0]
