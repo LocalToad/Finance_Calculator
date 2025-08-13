@@ -3,8 +3,7 @@ def login(user_keys):
 
     if User in user_keys:
         print("Confirmed")
-        index = user_keys.index(User)
-        return index
+        return User
     elif User == 'exit':
         return 'exit'
     else:

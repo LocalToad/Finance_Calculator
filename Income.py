@@ -7,7 +7,7 @@ settings = {
     }
 
 #def infoedit(index):
-def grabUserSettings(default_settings):
+def grabUserSettings(default_settings=settings):
     path = "Dicts.txt"
     if os.path.isfile(path):
         with open(path, 'rb') as f:  # Open in binary read mode ('rb')
