@@ -10,24 +10,24 @@ dict = {
     'toad':[0, 0, 0, 0, 0, 0, 0]
     }
 
-def grabIncomeUserSettings(default_settings=settings):
-    path = "Dicts.txt"
-    if os.path.isfile(path):
-        with open(path, 'rb') as f:  # Open in binary read mode ('rb')
-            user_settings = json.load(f)
+#def grabIncomeUserSettings(default_settings=settings):
+##    path = "Dicts.txt"
+ #   if os.path.isfile(path):
+ #       with open(path, 'rb') as f:  # Open in binary read mode ('rb')
+#            user_settings = json.load(f)
 
-    else:
-        with open('Dicts.txt', 'wb') as f:  # Open in binary write mode ('wb')
-            user_settings = json.dump(default_settings, f)
-    return user_settings
+ #   else:
+ #       with open('Dicts.txt', 'wb') as f:  # Open in binary write mode ('wb')
+ #           user_settings = json.dump(default_settings, f)
+  #  return user_settings
 
-def grabUserData(default_data=dict):
-    path = "hard_data.txt"
-    if os.path.isfile(path):
-        with open(path, 'rb') as f:  # Open in binary read mode ('rb')
-            user_data = json.load(f)
+#def grabUserData(default_data=dict):
+   # path = "hard_data.txt"
+    #if os.path.isfile(path):
+    #    with open(path, 'rb') as f:  # Open in binary read mode ('rb')
+    #        user_data = json.load(f)
 
-    else:
-        with open('hard_data.txt', 'wb') as f:  # Open in binary write mode ('wb')
-            user_data = json.dump(default_data, f)
-    return user_data
+    #else:
+    #    with open('hard_data.txt', 'wb') as f:  # Open in binary write mode ('wb')
+    #        user_data = json.dump(default_data, f)
+    #return user_data
