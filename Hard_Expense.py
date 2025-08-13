@@ -7,7 +7,7 @@ default_dict = {
 #default_array = [float.00, float.00, float.00, float.00, float.00, float.00, float.00]
 #value name
 #default_array = [Rent, Internet, Phone, Therapy, Storage, Student Loans, Subscriptions]
-def settings(key, settings_dict=None):
+def settings(key=None, settings_dict=None):
     if settings_dict == None:
          #if nothing imputed into settings_array return the default array
          if key == None:
