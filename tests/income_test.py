@@ -14,8 +14,6 @@ class TestIncome(unittest.TestCase):
     @patch('builtins.input', return_value='y')
     def test_incmain_success(self, mock_input):
 
-
-
         # Success Case, index = 0
         key = "toad"
         result = Income.incmain(key, self.dummy_settings)

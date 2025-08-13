@@ -1,10 +1,12 @@
-def login():
+def login(user_keys):
     User = input("Welcome, who are you logging data for? ").lower()
-    User_List = ('toad', 'snake')
-    if User in User_List:
+
+    if User in user_keys:
         print("Confirmed")
-        return User
+        index = user_keys.index(User)
+        return index
     elif User == 'exit':
         return 'exit'
     else:
         print("Error: User not found")
+        return False
