@@ -2,7 +2,6 @@ import Income
 import login
 import Hard_Expense
 
-
 def mainloop():
     while (True):
         settings = Income.grabUserSettings()
