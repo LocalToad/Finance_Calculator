@@ -1,3 +1,4 @@
+from functools import total_ordering
 
 default_dict = {
     'snake':[522, 30, 185, 175, 140.32, 168.16, 39.45],
@@ -22,9 +23,21 @@ def settings(key=None, settings_dict=None):
         print("Error 501000")
         return 501000
 
-def expense(settings_array):
+def expense(settings_array=None, arr=None):
     #check the settings_array var and see what the arr variable will be set to
-    arr = settings(settings_array)
+    if arr == None:
+        if settings_array == None:
+            return 'ERROR'
+        else:
+            arr = settings(settings_array)
+
+    total = 0
+    args = len(arr)
+    for i in range(args):
+        x = arr[i]
+        total += x
+    return total
+
 
 
 
