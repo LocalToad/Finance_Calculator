@@ -29,7 +29,18 @@ def writeJSONtoPath(path, dict_in):
         #{'name':'snake', 'salary':True, 'wage':2477.12, 'hours':0}
     #)
 
-
+def incomeWageSalaryMath(s, dict, key):
+    if s:
+        income = dict.get(key).get('wage')
+        return income
+    elif dict.get(key).get('hours') == 0:
+        print("Not working")
+        return 0
+    else:
+        wage = dict.get(key).get('wage')
+        hours = dict.get(key).get('hours')
+        income = wage * hours
+        return income
 # Error cases or success cases reture True-y values
 # Other cases that cause incmain to continue looping return False-y values
 
@@ -43,29 +54,21 @@ def incmain(key, settings_dict):
         cmd = input("Would you like to continue (y/n) or (edit)? ")
         if cmd.lower() == 'y':
             if isboolean:
-                if salary:
-                    income = settings_dict.get(key).get('wage')
-                    return income
-                elif settings_dict.get(key).get('hours') == 0:
-                    print("Not working")
-                    return 0
-                else:
-                    wage = settings_dict.get(key).get('wage')
-                    hours = settings_dict.get(key).get('hours')
-                    income = wage * hours
-                    return income
-            if not isboolean:
+                income = incomeWageSalaryMath(salary, settings_dict, key)
+            else:
                 print("Eror 402001")
                 return 402001
         elif cmd.lower() == 'n':
             print("Exiting Calculator")
-            return True
+            income = incomeWageSalaryMath(salary, settings_dict, key)
+            return income
         elif cmd.lower() == 'edit':
             if not inc_write(key, settings_dict):
                 continue
             else:
                 # User chose to exit, equivalent to break
-                return True
+                income = incomeWageSalaryMath(salary, settings_dict, key)
+                return income
         else:
             print("Error 401050")
             return 401050
