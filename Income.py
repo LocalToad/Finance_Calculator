@@ -1,22 +1,27 @@
 import json
 import os
+from datetime import date
 
 settings = {
         "toad": {'salary': False, 'wage': 0, 'hours': 0},
         "snake": {'salary': True, 'wage': 2477.12, 'hours': 0}
     }
 
+
+
 #def infoedit(index):
-def grabUserSettings():
-    path = "Dicts.json"
+def grabJSONifExists(path, default_dict):
     if os.path.isfile(path):
         with open(path, 'r') as f:
             return json.load(f)
 
     else:
-        with open('Dicts.json', 'w') as f:
-            json.dump(settings, f)
-            return settings
+        writeJSONtoPath(path, default_dict)
+        return default_dict
+
+def writeJSONtoPath(path, dict_in):
+    with open(path, 'w') as f:
+        json.dump(dict_in, f)
 
     # = (
        # {'name':(str), 'salary':(bool), 'wage':(float.00), 'hours':(float.0)},
@@ -86,5 +91,17 @@ def inc_write(key, settings_dict):
         print("temp done")
         return True
     else:
-        print("Eror 401080")
+        print("Error 401080")
         return 401070
+
+def income_report(report_list):
+    path = "Income_Reports.json"
+    default_dict = {}
+    report = grabJSONifExists(path, default_dict)
+    if report:
+        report[str(date.today())] = report_list
+    else:
+        report = default_dict
+    return report
+
+
