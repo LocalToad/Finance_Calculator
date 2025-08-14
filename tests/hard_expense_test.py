@@ -26,6 +26,21 @@ class TestHardExpense(unittest.TestCase):
         expected = 680
         assert result == expected
 
+        arr = [240.33, 330.33, 110.33]
+        result = Hard_Expense.expense(None, arr)
+        expected = 680.99
+        assert result == expected
+
+        arr = [240.23, 330.45, 110]
+        result = Hard_Expense.expense(None, arr)
+        expected = 680.68
+        assert result == expected
+
+        arr = [240, 330, 'frog']
+        result = Hard_Expense.expense(None, arr)
+        expected = 'TypeError'
+        assert result == expected
+
     def test_settings_success(self):
         key = None
         result = Hard_Expense.settings(key)

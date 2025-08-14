@@ -1,4 +1,6 @@
 from functools import total_ordering
+import json
+import os
 
 default_dict = {
     'snake':[522, 30, 185, 175, 140.32, 168.16, 39.45],
@@ -8,6 +10,29 @@ default_dict = {
 #default_array = [float.00, float.00, float.00, float.00, float.00, float.00, float.00]
 #value name
 #default_array = [Rent, Internet, Phone, Therapy, Storage, Student Loans, Subscriptions]
+def sumlist(arr):
+    total = 0
+    args = len(arr)
+    for i in range(args):
+        x = arr[i]
+        if isinstance(x, (int, float)):
+            total += x
+        else:
+            return 'TypeError'
+    return total
+
+
+#def grabUserData(default_data=default_dict):
+  #  path = "hard_data.txt"
+  #  if os.path.isfile(path):
+  #      with open(path, 'rb') as f:  # Open in binary read mode ('rb')
+   #         user_data = json.load(f)
+
+  #  else:
+ #       with open('hard_data.txt', 'wb') as f:  # Open in binary write mode ('wb')
+ #           user_data = json.dump(default_data, f)
+#    return user_data
+
 def settings(key=None, settings_dict=None):
     if settings_dict == None:
          #if nothing imputed into settings_array return the default array
@@ -28,13 +53,12 @@ def expense(settings_array=None, arr=None):
         else:
             arr = settings_array
 
-    total = 0
-    args = len(arr)
-    for i in range(args):
-        x = arr[i]
-        total += x
-    return total
+    total = sumlist(arr)
 
+    if total == 'TypeError':
+        return 'TypeError'
+    else:
+        return total
 
 
 
