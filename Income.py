@@ -7,16 +7,16 @@ settings = {
     }
 
 #def infoedit(index):
-def grabUserSettings(default_settings=settings):
-    path = "Dicts.txt"
+def grabUserSettings():
+    path = "Dicts.json"
     if os.path.isfile(path):
-       with open(path, 'rb') as f:  # Open in binary read mode ('rb')
-            user_settings = json.load(f)
+        with open(path, 'r') as f:
+            return json.load(f)
 
     else:
-        with open('Dicts.txt', 'wb') as f:  # Open in binary write mode ('wb')
-            user_settings = json.dump(default_settings, f)
-    return user_settings
+        with open('Dicts.json', 'w') as f:
+            json.dump(settings, f)
+            return settings
 
     # = (
        # {'name':(str), 'salary':(bool), 'wage':(float.00), 'hours':(float.0)},
@@ -79,7 +79,7 @@ def inc_write(key, settings_dict):
             if new == 'false':
                 new = False
         settings_dict[key][feature] = new
-        with open('Dicts.txt', 'wb') as f:  # Open in binary write mode ('wb')
+        with open('Dicts.json', 'w') as f:  # Open in binary write mode ('wb')
             json.dump(settings_dict, f)
         return False
     elif a.lower() == 'n':
