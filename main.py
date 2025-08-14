@@ -17,7 +17,7 @@ def mainloop():
             print(income)
             print(hard_expense)
             print(net)
-        return True
+    return True
 
 if __name__ == "__main__":
     mainloop()
