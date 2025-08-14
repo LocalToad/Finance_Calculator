@@ -103,7 +103,7 @@ class TestIncome(unittest.TestCase):
         expected = False
         result = Income.inc_write(key, self.dummy_settings)
 
-        mock_file.assert_called_once_with("Dicts.json", "wb")
+        mock_file.assert_called_once_with("Dicts.json", "w")
         mock_dump.assert_called_once()
         assert expected == result
 

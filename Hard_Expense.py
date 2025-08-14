@@ -24,7 +24,7 @@ def expense(settings_array=None, arr=None):
     #check the settings_array var and see what the arr variable will be set to
     if arr == None:
         if settings_array == None:
-            settings()
+            arr = settings()
         else:
             arr = settings_array
 
