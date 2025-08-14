@@ -11,7 +11,7 @@ def mainloop():
             break
         else:
             income = Income.incmain(user, Income.grabUserSettings())
-            hard_expense = Hard_Expense.expense(settings)
+            hard_expense = Hard_Expense.expense(Hard_Expense.settings(user))
             net = income - hard_expense
             print(income)
             print(hard_expense)

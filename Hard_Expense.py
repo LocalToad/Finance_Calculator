@@ -11,25 +11,22 @@ default_dict = {
 def settings(key=None, settings_dict=None):
     if settings_dict == None:
          #if nothing imputed into settings_array return the default array
-         if key == None:
+        if key == None:
             key = 'toad'
-         default_array = default_dict.get(key)
-         return default_array
-    elif settings_dict != None:
+        default_array = default_dict.get(key)
+        return default_array
+    else:
         #replace this with a download of the data from the file
         settings_array = settings_dict.get(key)
         return settings_array
-    else:
-        print("Error 501000")
-        return 501000
 
 def expense(settings_array=None, arr=None):
     #check the settings_array var and see what the arr variable will be set to
     if arr == None:
         if settings_array == None:
-            return 'ERROR'
+            arr = settings()
         else:
-            arr = settings(settings_array)
+            arr = settings_array
 
     total = 0
     args = len(arr)

@@ -13,7 +13,7 @@ class TestHardExpense(unittest.TestCase):
     def test_expense_success(self):
         arr = None
         result = Hard_Expense.expense(None, arr)
-        expected = "ERROR"
+        expected = 0
         assert result == expected
 
         arr = [1,1,1]
