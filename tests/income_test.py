@@ -1,14 +1,20 @@
 import unittest
+import datetime
 
 import Income
 
+from freezegun import freeze_time
 from unittest.mock import patch, mock_open
+
 
 class TestIncome(unittest.TestCase):
     dummy_settings = {
         "toad": {'salary': False, 'wage': 0, 'hours': 0},
         "snake": {'salary': True, 'wage': 2477.12, 'hours': 0}
     }
+
+    default_dict = {}
+
 
     @patch('builtins.input', return_value='y')
     def test_incmain_success(self, mock_input):
@@ -106,6 +112,22 @@ class TestIncome(unittest.TestCase):
         mock_file.assert_called_once_with("Dicts.json", "w")
         mock_dump.assert_called_once()
         assert expected == result
+
+    @freeze_time("2012-12-01")
+    @patch('Income.writeJSONtoPath')
+    @patch('Income.grabJSONifExists', return_value=default_dict)
+    def test_income_report_success_no_saved_list(self, mock_grab_json, mock_write_json):
+        sample_date = datetime.date(2012, 12, 1)
+
+        date_string = str(sample_date)
+
+        path = "Income_Report.json"
+        sample_list = [0, 1, 2]
+        expected = {f"{date_string}": sample_list}
+        result = Income.income_report(path, sample_list)
+        assert result == expected
+
+
 
 
 

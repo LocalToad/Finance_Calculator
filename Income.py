@@ -1,5 +1,6 @@
 import json
 import os
+import datetime
 from datetime import date
 
 settings = {
@@ -94,14 +95,12 @@ def inc_write(key, settings_dict):
         print("Error 401080")
         return 401070
 
-def income_report(report_list):
-    path = "Income_Reports.json"
+def income_report(path, report_list):
     default_dict = {}
     report = grabJSONifExists(path, default_dict)
-    if report:
-        report[str(date.today())] = report_list
-    else:
-        report = default_dict
+
+    report[str(date.today())] = report_list
+    writeJSONtoPath(path, report_list)
     return report
 
 
