@@ -1,5 +1,6 @@
 import unittest
 import datetime
+from random import sample
 
 import Income
 
@@ -15,6 +16,9 @@ class TestIncome(unittest.TestCase):
 
     default_dict = {}
 
+    saved_date = "2012-01-01"
+    saved_list = [1, 2, 3]
+    saved_dict = {saved_date: saved_list}
 
     @patch('builtins.input', return_value='y')
     def test_incmain_success(self, mock_input):
@@ -127,7 +131,15 @@ class TestIncome(unittest.TestCase):
         result = Income.income_report(path, sample_list)
         assert result == expected
 
+    @freeze_time("2012-12-01")
+    @patch('Income.writeJSONtoPath')
+    @patch('Income.grabJSONifExists', return_value=saved_dict)
+    def test_income_report_success_saved_list(self, mock_grab_json, mock_write_json):
+        sample_date = datetime.date(2012, 12, 1)
+        date_string = str(sample_date)
 
-
-
-
+        path = "Income_Report.json"
+        sample_list = [4, 5, 6]
+        expected= {self.saved_date: self.saved_list, date_string: sample_list}
+        result = Income.income_report(path, sample_list)
+        assert result == expected
