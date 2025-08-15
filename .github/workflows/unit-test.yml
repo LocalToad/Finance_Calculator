@@ -25,7 +25,7 @@ jobs:
 
       - name: Github Action for testing the code
         run: |
-          coverage run --source=./ --omit=tests/ -m pytest tests/
+          coverage run --source=./ -m pytest tests/
         
 
       - name: Github Action to retrieve coverage percentage
