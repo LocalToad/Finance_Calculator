@@ -44,28 +44,25 @@ def incmain(key, settings_dict):
 
     salary = settings_dict.get(key).get('salary')
     isboolean = isinstance(salary, bool)
-    while True:
-        cmd = input("Would you like to continue (y/n) or (edit)? ")
-        if cmd.lower() == 'y':
-            if isboolean:
-                income = incomeWageSalaryMath(salary, settings_dict, key)
-            else:
-                print("Eror 402001")
-                return 402001
-        elif cmd.lower() == 'n':
-            print("Exiting Calculator")
-            income = incomeWageSalaryMath(salary, settings_dict, key)
-            return income
-        elif cmd.lower() == 'edit':
-            if not inc_write(key, settings_dict):
-                continue
-            else:
-                # User chose to exit, equivalent to break
-                income = incomeWageSalaryMath(salary, settings_dict, key)
-                return income
+
+    cmd = input("Would you like to continue (y/n) or (edit)? ")
+    if cmd.lower() == 'y':
+        if isboolean:
+            return incomeWageSalaryMath(salary, settings_dict, key)
         else:
-            print("Error 401050")
-            return 401050
+            print("Eror 402001")
+            return 402001
+    elif cmd.lower() == 'n':
+        print("Exiting Calculator")
+        return incomeWageSalaryMath(salary, settings_dict, key)
+
+    elif cmd.lower() == 'edit':
+        if inc_write(key, settings_dict):
+            # User chose to exit, equivalent to break
+            return incomeWageSalaryMath(salary, settings_dict, key)
+    else:
+        print("Error 401050")
+        return 401050
 
 def inc_write(key, settings_dict):
     print("name(str), salary(bool), wage(float.00), hours(float.0)")

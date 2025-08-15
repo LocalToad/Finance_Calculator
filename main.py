@@ -4,7 +4,7 @@ import Hard_Expense
 import Data_Retrieval
 
 def mainloop():
-    while (True):
+    while True:
         settings = Income.grabUserSettings()
         keys = settings.keys()
         user = login.login(keys)
