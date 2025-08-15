@@ -20,6 +20,7 @@ class TestIncome(unittest.TestCase):
     saved_list = [1, 2, 3]
     saved_dict = {saved_date: saved_list}
 
+    @patch('Income.incomeWageSalaryMath', return_value=0)
     @patch('builtins.input', return_value='y')
     def test_incmain_success(self, mock_input):
 
@@ -29,11 +30,19 @@ class TestIncome(unittest.TestCase):
         expected = 0
         assert result == expected
 
+    @patch('Income.incomeWageSalaryMath', return_value=2477.12)
+    @patch('builtins.input', return_value='y')
+    def test_incmain_success_1(self, mock_input, mock_income_salary_math):
+
         # Success Case, index = 1
         key = "snake"
         result = Income.incmain(key, self.dummy_settings)
         expected = 2477.12
         assert result == expected
+
+    @patch('Income.incomeWageSalaryMath', side_effect=[608, 675, 800])
+    @patch('builtins.input', return_value='y')
+    def test_incmain_success_hours(self, mock_input, mock_income_salary_math):
 
         # Success Case, index = 0, toad wages/hours > 0
         key = "toad"
@@ -62,6 +71,7 @@ class TestIncome(unittest.TestCase):
         expected = 402001
         assert result == expected
 
+
     def test_incmain_missing_args(self):
         # Missing Key, should return Truey value
         key = None
@@ -81,19 +91,20 @@ class TestIncome(unittest.TestCase):
         result = Income.incmain(key, settings)
         assert result == expected
 
-
+    @patch('Income.incomeWageSalaryMath', return_value=0)
     @patch('builtins.input', return_value='n')
-    def test_incmain_exit(self, mock_input):
+    def test_incmain_exit(self, mock_input, mock_income_salary_math):
         key = "toad"
-        expected = True
+        expected = 0
         result = Income.incmain(key, self.dummy_settings)
         assert result == expected
 
+    @patch('Income.incomeWageSalaryMath', return_value=0)
     @patch('Income.inc_write', return_value=True)
     @patch('builtins.input', return_value='edit')
-    def test_incmain_edit_user_exit(self, mock_input, mock_inc_write):
+    def test_incmain_edit_user_exit(self, mock_input, mock_inc_write, mock_income_salary_math):
         key = "toad"
-        expected = True
+        expected = 0
         result = Income.incmain(key, self.dummy_settings)
         assert result == expected
 
