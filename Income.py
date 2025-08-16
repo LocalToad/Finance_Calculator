@@ -11,7 +11,7 @@ settings = {
 
 
 #def infoedit(index):
-def grabJSONifExists(path, default_dict):
+def grabJSONifExists(path, default_dict=None):
     if os.path.isfile(path):
         with open(path, 'r') as f:
             return json.load(f)
