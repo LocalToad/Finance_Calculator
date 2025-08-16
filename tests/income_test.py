@@ -22,7 +22,7 @@ class TestIncome(unittest.TestCase):
 
     @patch('Income.incomeWageSalaryMath', return_value=0)
     @patch('builtins.input', return_value='y')
-    def test_incmain_success(self, mock_input):
+    def test_incmain_success(self, mock_input, mock_wage_salary):
 
         # Success Case, index = 0
         key = "toad"
