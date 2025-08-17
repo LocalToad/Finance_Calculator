@@ -8,13 +8,13 @@ DICTS_PATH = "dicts.json"
 def mainloop():
     while (True):
 
-        settings = Income.grabJSONifExists(DICTS_PATH)
+        settings = Data_Retrieval.grabJSONifExists(DICTS_PATH)
         keys = settings.keys()
         user = login.login(keys)
         if user == "exit":
             break
         else:
-            income = Income.incmain(user, Income.grabJSONifExists(DICTS_PATH))
+            income = Income.incmain(user, Data_Retrieval.grabJSONifExists(DICTS_PATH))
             hard_expense = Hard_Expense.expense(Hard_Expense.settings(user))
             net = income - hard_expense
             print(income)

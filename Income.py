@@ -10,19 +10,7 @@ settings = {
 
 
 
-#def infoedit(index):
-def grabJSONifExists(path, default_dict=None):
-    if os.path.isfile(path):
-        with open(path, 'r') as f:
-            return json.load(f)
 
-    else:
-        writeJSONtoPath(path, default_dict)
-        return default_dict
-
-def writeJSONtoPath(path, dict_in):
-    with open(path, 'w') as f:
-        json.dump(dict_in, f)
 
     # = (
        # {'name':(str), 'salary':(bool), 'wage':(float.00), 'hours':(float.0)},
@@ -95,12 +83,6 @@ def inc_write(key, settings_dict):
         print("Error 401080")
         return 401070
 
-def income_report(path, report_list):
-    default_dict = {}
-    report = grabJSONifExists(path, default_dict)
 
-    report[str(date.today())] = report_list
-    writeJSONtoPath(path, report_list)
-    return report
 
 
