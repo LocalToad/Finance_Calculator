@@ -8,7 +8,7 @@ settings = {
         "snake": {'salary': True, 'wage': 2477.12, 'hours': 0}
     }
 
-
+INCOME_FILE_SUFFIX = '_Income_Report.json'
 
 
 
@@ -57,6 +57,22 @@ def incmain(key, settings_dict):
     else:
         print("Error 401050")
         return 401050
+
+def inc_view(name):
+    # will look something like "toad_Income_Report.json"
+    full_json_name = f"{name}{INCOME_FILE_SUFFIX}"
+    report = income_report(full_json_name)
+
+    if report:
+        # loop over every item in the report and average all the incomes
+        numbers = []
+        for item in report:
+            numbers.append(item.value)
+            print(f"\n{item.key}: {item.value}")
+        average = sum(numbers) / len(numbers)
+        print(f"Average Income: {average:.2f}")
+
+
 
 def inc_write(key, settings_dict):
     print("name(str), salary(bool), wage(float.00), hours(float.0)")
