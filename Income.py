@@ -8,6 +8,8 @@ settings = {
         "snake": {'salary': True, 'wage': 2477.12, 'hours': 0}
     }
 
+INCOME_FILE_SUFFIX = '_Income_Report.json'
+
 
 
 #def infoedit(index):
@@ -50,12 +52,27 @@ def incmain(key, settings_dict):
                     print("Not working")
                     return 0
                 else:
-                    wage = settings_dict.get(key).get('wage')
-                    hours = settings_dict.get(key).get('hours')
-                    income = wage * hours
-                    return income
+                    cmd = input("Would you like to see your income information?")
+                    if cmd.lower() == 'y':
+                        # Display income information from user's income information
+                        inc_view(key)
+                        response = 'n'
+                        while response != 'y':
+                            cmd = input("Ready to move on? (y/n)")
+                            response = cmd.lower()
+                            if response == 'y':
+                                break
+                            print("Okay.")
+                    else:
+                        print("exiting Calculator")
+                        return True
+
+                    # wage = settings_dict.get(key).get('wage')
+                    # hours = settings_dict.get(key).get('hours')
+                    # income = wage * hours
+                    # return income
             if not isboolean:
-                print("Eror 402001")
+                print("Error 402001")
                 return 402001
         elif cmd.lower() == 'n':
             print("Exiting Calculator")
@@ -69,6 +86,22 @@ def incmain(key, settings_dict):
         else:
             print("Error 401050")
             return 401050
+
+def inc_view(name):
+    # will look something like "toad_Income_Report.json"
+    full_json_name = f"{name}{INCOME_FILE_SUFFIX}"
+    report = income_report(full_json_name)
+
+    if report:
+        # loop over every item in the report and average all the incomes
+        numbers = []
+        for item in report:
+            numbers.append(item.value)
+            print(f"\n{item.key}: {item.value}")
+        average = sum(numbers) / len(numbers)
+        print(f"Average Income: {average:.2f}")
+
+
 
 def inc_write(key, settings_dict):
     print("name(str), salary(bool), wage(float.00), hours(float.0)")
@@ -95,12 +128,14 @@ def inc_write(key, settings_dict):
         print("Error 401080")
         return 401070
 
-def income_report(path, report_list):
+def income_report(path, report_list=None):
     default_dict = {}
     report = grabJSONifExists(path, default_dict)
 
-    report[str(date.today())] = report_list
-    writeJSONtoPath(path, report_list)
+    if report_list:
+        report[str(date.today())] = report_list
+        writeJSONtoPath(path, report_list)
+
     return report
 
 
