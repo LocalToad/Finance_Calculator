@@ -24,9 +24,12 @@ jobs:
           pip install -r requirements.txt
 
       - name: Github Action for testing the code
-        run: coverage run --source=./ -m pytest tests/
+        run: |
+          coverage run --source=./ -m pytest tests/
+        
 
       - name: Github Action to retrieve coverage percentage
         id: total-coverage
         run: |
-          coverage json -q -o /dev/stdout | python -c 'import sys, json; perc_cov = json.load(sys.stdin)["totals"]["percent_covered"]; is_covered = perc_cov >= '$MIN_COVERAGE_REQUIRED'; print(f"\nCoverage is: {perc_cov:.2f}%"); sys.exit(not is_covered)'
+          coverage report
+          coverage json -q -o /dev/stdout | python -c 'import sys, json; perc_cov = json.load(sys.stdin)["totals"]["percent_covered"]; is_covered = perc_cov >= '$MIN_COVERAGE_REQUIRED'; print(f"\nTotal Coverage is: {perc_cov:.2f}%"); sys.exit(not is_covered)'

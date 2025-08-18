@@ -10,26 +10,25 @@ settings = {
 
 
 
-#def infoedit(index):
-def grabJSONifExists(path, default_dict=None):
-    if os.path.isfile(path):
-        with open(path, 'r') as f:
-            return json.load(f)
 
-    else:
-        writeJSONtoPath(path, default_dict)
-        return default_dict
-
-def writeJSONtoPath(path, dict_in):
-    with open(path, 'w') as f:
-        json.dump(dict_in, f)
 
     # = (
        # {'name':(str), 'salary':(bool), 'wage':(float.00), 'hours':(float.0)},
         #{'name':'snake', 'salary':True, 'wage':2477.12, 'hours':0}
     #)
 
-
+def incomeWageSalaryMath(s, dict, key):
+    if s:
+        income = dict.get(key).get('wage')
+        return income
+    elif dict.get(key).get('hours') == 0:
+        print("Not working")
+        return 0
+    else:
+        wage = dict.get(key).get('wage')
+        hours = dict.get(key).get('hours')
+        income = wage * hours
+        return income
 # Error cases or success cases reture True-y values
 # Other cases that cause incmain to continue looping return False-y values
 
@@ -39,36 +38,25 @@ def incmain(key, settings_dict):
 
     salary = settings_dict.get(key).get('salary')
     isboolean = isinstance(salary, bool)
-    while True:
-        cmd = input("Would you like to continue (y/n) or (edit)? ")
-        if cmd.lower() == 'y':
-            if isboolean:
-                if salary:
-                    income = settings_dict.get(key).get('wage')
-                    return income
-                elif settings_dict.get(key).get('hours') == 0:
-                    print("Not working")
-                    return 0
-                else:
-                    wage = settings_dict.get(key).get('wage')
-                    hours = settings_dict.get(key).get('hours')
-                    income = wage * hours
-                    return income
-            if not isboolean:
-                print("Eror 402001")
-                return 402001
-        elif cmd.lower() == 'n':
-            print("Exiting Calculator")
-            return True
-        elif cmd.lower() == 'edit':
-            if not inc_write(key, settings_dict):
-                continue
-            else:
-                # User chose to exit, equivalent to break
-                return True
+
+    cmd = input("Would you like to continue (y/n) or (edit)? ")
+    if cmd.lower() == 'y':
+        if isboolean:
+            return incomeWageSalaryMath(salary, settings_dict, key)
         else:
-            print("Error 401050")
-            return 401050
+            print("Eror 402001")
+            return 402001
+    elif cmd.lower() == 'n':
+        print("Exiting Calculator")
+        return incomeWageSalaryMath(salary, settings_dict, key)
+
+    elif cmd.lower() == 'edit':
+        if inc_write(key, settings_dict):
+            # User chose to exit, equivalent to break
+            return incomeWageSalaryMath(salary, settings_dict, key)
+    else:
+        print("Error 401050")
+        return 401050
 
 def inc_write(key, settings_dict):
     print("name(str), salary(bool), wage(float.00), hours(float.0)")
@@ -95,12 +83,6 @@ def inc_write(key, settings_dict):
         print("Error 401080")
         return 401070
 
-def income_report(path, report_list):
-    default_dict = {}
-    report = grabJSONifExists(path, default_dict)
 
-    report[str(date.today())] = report_list
-    writeJSONtoPath(path, report_list)
-    return report
 
 
