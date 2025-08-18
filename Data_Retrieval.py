@@ -21,6 +21,6 @@ def generateReport(path, report_list):
     default_dict = {}
     report = grabJSONifExists(path, default_dict)
 
-    report[str(date.today())] = report_list
+    report[str(datetime.date.today())] = report_list
     writeJSONtoPath(path, report_list)
     return report

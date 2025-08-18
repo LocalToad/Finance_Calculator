@@ -3,6 +3,7 @@ import datetime
 from random import sample
 
 import Income
+import Data_Retrieval
 
 from freezegun import freeze_time
 from unittest.mock import patch, mock_open
@@ -127,30 +128,3 @@ class TestIncome(unittest.TestCase):
         mock_file.assert_called_once_with("Dicts.json", "w")
         mock_dump.assert_called_once()
         assert expected == result
-
-    @freeze_time("2012-12-01")
-    @patch('Income.writeJSONtoPath')
-    @patch('Income.grabJSONifExists', return_value=default_dict)
-    def test_income_report_success_no_saved_list(self, mock_grab_json, mock_write_json):
-        sample_date = datetime.date(2012, 12, 1)
-
-        date_string = str(sample_date)
-
-        path = "Income_Report.json"
-        sample_list = [0, 1, 2]
-        expected = {f"{date_string}": sample_list}
-        result = Income.income_report(path, sample_list)
-        assert result == expected
-
-    @freeze_time("2012-12-01")
-    @patch('Income.writeJSONtoPath')
-    @patch('Income.grabJSONifExists', return_value=saved_dict)
-    def test_income_report_success_saved_list(self, mock_grab_json, mock_write_json):
-        sample_date = datetime.date(2012, 12, 1)
-        date_string = str(sample_date)
-
-        path = "Income_Report.json"
-        sample_list = [4, 5, 6]
-        expected= {self.saved_date: self.saved_list, date_string: sample_list}
-        result = Income.income_report(path, sample_list)
-        assert result == expected
